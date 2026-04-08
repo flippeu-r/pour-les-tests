@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Projet;
+
+class ProjetController extends Controller
+{
+    // Affiche la page
+    public function create()
+    {
+        return view('creer_projet'); 
+    }
+
+    // Traite le formulaire
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'nom' => 'required',
+            'client' => 'required',
+            'date_fin' => 'required|date',
+            'budget' => 'nullable|numeric',
+            'statut' => 'required',
+            'description' => 'nullable'
+        ]);
+
+        Projet::create($data);
+
+        return redirect('/dashboard');
+    }
+}
