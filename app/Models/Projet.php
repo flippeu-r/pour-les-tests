@@ -14,4 +14,8 @@ class Projet extends Model
         'statut',
         'description',
     ];
+
+    public function tickets() {
+        return $this->hasMany(Ticket::class);
+    }
 }

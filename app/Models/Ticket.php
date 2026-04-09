@@ -17,4 +17,8 @@ class Ticket extends Model
         'projet_id',
         'user_id',
     ];
+
+    public function projet() {
+        return $this->belongsTo(Projet::class);
+    }
 }

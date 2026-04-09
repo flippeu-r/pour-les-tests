@@ -63,12 +63,12 @@
                         @if(isset($projets))
                             @foreach ($projets as $projet)
                             <tr>
-                                <td><strong>#{{ $projet->id }}</strong></td>
-                                <td>{{ $projet->nom }}</td>
                                 <td><span class="client-badge">{{ $projet->client }}</span></td>
-                                <td>{{ $projet->date_fin  }}</td>
+                                <td>{{ $projet->nom }}</td>
+                                <td>-</td>
                                 <td>{{ $projet->budget }} h</td>
-                                <td><a href="#" class="btn-action"><i class="fas fa-eye"></i></a></td>
+                                <td>{{ $projet->date_fin }}</td>
+                                <td><a href="/projets/{{ $projet->id }}" class="btn-action"><i class="fas fa-eye"></i></a></td>
                             </tr>
                             @endforeach
                         @else

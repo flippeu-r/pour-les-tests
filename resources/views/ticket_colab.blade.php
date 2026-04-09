@@ -70,8 +70,10 @@
                             <tr>
                                 <td><strong>#{{ $ticket->id }}</strong></td>
                                 <td>{{ $ticket->sujet }}</td>
-                                <td><span class="client-badge">{{ $ticket->projet_id}}</span></td>
-                                <td><span class="collab-name">{{ $ticket->user_id}}</span></td>
+                                
+                                <td><span class="client-badge">{{ $ticket->projet->client ?? '-' }}</span></td>
+                                <td><span class="collab-name">{{ $ticket->projet->nom ?? '-' }}</span></td>
+
                                 <td class="time-cell">{{ $ticket->temps ?? '0 h' }}</td>
                                 <td><span class="priority {{ $ticket->priorite_class ?? '' }}">{{ $ticket->priorite }}</span></td>
                                 <td><span class="status {{ $ticket->statut_class ?? '' }}">{{ $ticket->statut }}</span></td>
