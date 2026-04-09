@@ -582,16 +582,14 @@ if (boutonsFiltre.length > 0) {
 
 
 
-
 function envoyerTicket() {
 
-    // On récupère les valeurs des champs de la modale
     var sujet = document.getElementById("modal_sujet").value;
     var description = document.getElementById("modal_description").value;
     var projet_id = document.getElementById("modal_projet").value;
     var type = document.getElementById("modal_type").value;
+    var projet_texte = document.getElementById("modal_projet").options[document.getElementById("modal_projet").selectedIndex].text;
 
-    // On envoie les données à la route API avec fetch
     fetch("/api/tickets", {
         method: "POST",
         headers: {
@@ -610,8 +608,29 @@ function envoyerTicket() {
     })
     .then(function(data) {
         console.log("Ticket créé !", data);
+
+        // On ferme la modale
         document.getElementById("modale").close();
-        alert("Ticket créé avec succès !");
+
+        // On crée une nouvelle ligne dans le tableau
+        var tbody = document.querySelector("tbody");
+        var nouvelleLigne = document.createElement("tr");
+        nouvelleLigne.innerHTML = 
+            "<td><strong>#" + data.id + "</strong></td>" +
+            "<td>" + data.sujet + "</td>" +
+            "<td><span class='client-badge'>" + projet_texte + "</span></td>" +
+            "<td><span class='collab-name'>-</span></td>" +
+            "<td class='time-cell'>0 h</td>" +
+            "<td><span class='priority'>" + data.priorite + "</span></td>" +
+            "<td><span class='status'>" + data.statut + "</span></td>" +
+            "<td><span class='type'>" + data.type + "</span></td>" +
+            "<td><a href='/tickets/" + data.id + "' class='btn-action'><i class='fas fa-eye'></i></a></td>";
+
+        tbody.appendChild(nouvelleLigne);
+
+        // On remet les champs de la modale à zéro
+        document.getElementById("modal_sujet").value = "";
+        document.getElementById("modal_description").value = "";
     })
     .catch(function(erreur) {
         console.log("Erreur :", erreur);
