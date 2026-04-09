@@ -78,10 +78,10 @@
                                 <tr>
                                     <td>#{{ $ticket->id }}</td>
                                     <td>{{ $ticket->sujet }}</td>
-                                    <td>{{ $ticket->client }}</td>
-                                    <td><span class="status {{ $statut_class }}">{{ $ticket->status }}</span></td>
+                                    <td>{{ $ticket->projet->client ?? '-' }}</td>
+                                    <td><span class="status">{{ $ticket->statut }}</span></td>
                                     <td>{{ $ticket->priorite }}</td>
-                                    <td><span class="{{ $type_class }}">{{ $ticket->type }}</span></td>
+                                    <td><span class="{{ $ticket->type }}">{{ $ticket->type }}</span></td>
                                 </tr>
                             @endforeach
                         @else

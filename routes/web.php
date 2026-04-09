@@ -75,9 +75,10 @@ Route::get('/projets/creer', function () {
 });
 
 Route::get('/projets/{id}', function ($id) {
-    return view('detail_projet'); 
+    $projet = \App\Models\Projet::findOrFail($id);
+    $tickets = $projet->tickets;
+    return view('detail_projet', compact('projet', 'tickets'));
 });
-
 
 // --- 4. GESTION DES TICKETS ---
 Route::get('/tickets', [TicketController::class, 'index']);
