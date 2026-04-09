@@ -80,9 +80,7 @@ Route::get('/tickets', function () {
     return view('ticket_colab');
 });
 
-Route::get('/tickets/creer', function () {
-    return view('create_test');
-});
+Route::get('tickets/creer', [TicketController::class,'create']);
 
 Route::get('/tickets/{id}', function ($id) {
     // Le {id} permet d'attraper le numéro du ticket dans l'URL !
