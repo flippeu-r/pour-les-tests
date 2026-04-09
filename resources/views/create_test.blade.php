@@ -61,7 +61,7 @@
                                 
                                 @if(isset($liste_projets))
                                     @foreach ($liste_projets as $projet)
-                                        <option value="{{ $projet->nom }}">
+                                        <option value="{{ $projet->id }}">
                                             {{ $projet->client }} - {{ $projet->nom }}
                                         </option>
                                     @endforeach

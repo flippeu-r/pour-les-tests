@@ -29,6 +29,10 @@ class TicketController extends Controller
     return redirect('/tickets');
     
 }
+public function create(){
+    $liste_projets = Projet::all();
+    return view ("create_test", compact("liste_projets"));
+}
 }
 
 
