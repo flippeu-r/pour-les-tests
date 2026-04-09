@@ -29,4 +29,10 @@ class ProjetController extends Controller
 
         return redirect('/dashboard');
     }
+
+    public function index() {
+        $projets = Projet::all();
+        return view('proj_colab', compact('projets'));
+    }
+
 }

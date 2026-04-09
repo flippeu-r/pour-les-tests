@@ -8,6 +8,7 @@ use App\Http\Controllers\ProjetController;
 
 use App\Http\Controllers\TicketController;
 
+use App\Models\Projet;
 
 // Les routes POST (quand on valide un formulaire)
 Route::post('/inscription', [AuthController::class, 'inscription']);
@@ -49,7 +50,11 @@ Route::get('/mot-de-passe-oublie', function () {
 
 // --- 2. ESPACE COLLABORATEUR (Général) ---
 Route::get('/dashboard', function () {
-    return view('dash_colab');
+    $derniers_tickets = \App\Models\Ticket::latest()->take(5)->get();
+    $total_tickets = \App\Models\Ticket::count();
+    $tickets_actifs = \App\Models\Ticket::whereIn('statut', ['Nouveau', 'En cours'])->count();
+    $total_projets = \App\Models\Projet::count();
+    return view('dash_colab', compact('derniers_tickets', 'total_tickets', 'tickets_actifs', 'total_projets'));
 });
 
 Route::get('/profil', function () {
@@ -62,9 +67,8 @@ Route::get('/parametres', function () {
 
 
 // --- 3. GESTION DES PROJETS ---
-Route::get('/projets', function () {
-    return view('proj_colab');
-});
+Route::get('/projets', [ProjetController::class, 'index']);
+
 
 Route::get('/projets/creer', function () {
     return view('creer_projet'); 
@@ -76,9 +80,7 @@ Route::get('/projets/{id}', function ($id) {
 
 
 // --- 4. GESTION DES TICKETS ---
-Route::get('/tickets', function () {
-    return view('ticket_colab');
-});
+Route::get('/tickets', [TicketController::class, 'index']);
 
 Route::get('tickets/creer', [TicketController::class,'create']);
 

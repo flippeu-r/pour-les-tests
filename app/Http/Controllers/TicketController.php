@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Projet; 
 
 class TicketController extends Controller
 {
@@ -32,6 +33,10 @@ class TicketController extends Controller
 public function create(){
     $liste_projets = Projet::all();
     return view ("create_test", compact("liste_projets"));
+}
+public function index() {
+    $tickets = Ticket::all();
+    return view('ticket_colab', compact('tickets'));
 }
 }
 

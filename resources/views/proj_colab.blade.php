@@ -66,8 +66,8 @@
                                 <td><strong>#{{ $projet->id }}</strong></td>
                                 <td>{{ $projet->nom }}</td>
                                 <td><span class="client-badge">{{ $projet->client }}</span></td>
-                                <td>{{ $projet->date_creation }}</td>
-                                <td>{{ $projet->budget }} €</td>
+                                <td>{{ $projet->date_fin  }}</td>
+                                <td>{{ $projet->budget }} h</td>
                                 <td><a href="#" class="btn-action"><i class="fas fa-eye"></i></a></td>
                             </tr>
                             @endforeach
