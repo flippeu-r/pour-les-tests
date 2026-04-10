@@ -22,8 +22,14 @@ class ProjetController extends Controller
             'date_fin' => 'required|date',
             'budget' => 'nullable|numeric',
             'statut' => 'required',
-            'description' => 'nullable'
+            'description' => 'nullable',
+            'user_id',   
+
         ]);
+
+        // On récupère l'id de l'utilisateur client sélectionné
+        $userClient = \App\Models\User::where('name', $request->client)->first();
+        $data['user_id'] = $userClient ? $userClient->id : null;
 
         Projet::create($data);
 

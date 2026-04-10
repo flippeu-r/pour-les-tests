@@ -54,18 +54,16 @@
                         <div class="form-group">
                             <label for="client">Client <span class="required">*</span></label>
                             
-                            <input type="text" id="client" name="client" list="clients_existants" placeholder="Tapez ou choisissez..." autocomplete="off" required>
-                            <datalist id="clients_existants">
-                                @if(isset($liste_clients))
-                                    @foreach ($liste_clients as $c)
-                                        <option value="{{ $c->client }}">
-                                    @endforeach
-                                @endif
-                            </datalist>
+                            <select name="client" id="client" required style="width:100%; padding:10px; border-radius:8px;">
+                                <option value="" disabled selected>Choisir un client...</option>
+                                @foreach(\App\Models\User::where('role', 'client')->get() as $u)
+                                    <option value="{{ $u->name }}">{{ $u->name }}</option>
+                                @endforeach
+                            </select>
 
                             <div id="client_error" class="error-text titanic">Il faut choisir un Client</div>
                         </div>
-                        
+                                                
                         <div class="form-group">
                             <label for="date">Date de fin (Deadline)</label>
                             <input type="date" id="date" name="date_fin" required>
