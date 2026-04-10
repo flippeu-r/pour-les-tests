@@ -16,6 +16,7 @@ class Ticket extends Model
         'statut',
         'projet_id',
         'user_id',
+        'commentaire_client',
     ];
 
     public function projet() {

@@ -119,11 +119,9 @@ Route::post('/client/tickets/{id}/valider', function ($id) {
     } else {
         $ticket->statut = 'Refusé';
     }
+    $ticket->commentaire_client = request('commentaire');  // ← ici, avant save()
     $ticket->save();
     return redirect('/client');
 });
 
 
-//commentaires tickets 
-
-$ticket->commentaire_client = request('commentaire');
