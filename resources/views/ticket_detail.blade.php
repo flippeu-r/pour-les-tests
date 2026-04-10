@@ -68,7 +68,14 @@
               <div class="card">   <h3>Temps Passé</h3>     <p class="stat-value">{{ $total_heures ?? 0 }} h</p>     <span>Cumul total</span>      </div>
             </div>
 
-
+            @if($ticket->commentaire_client)
+                <div class="tickets-container" style="margin-bottom:20px;">
+                    <h2>Commentaire du client</h2>
+                    <p style="padding:15px; background:rgba(255,255,255,0.05); border-radius:8px; border-left:4px solid #6c63ff;">
+                        {{ $ticket->commentaire_client }}
+                    </p>
+                </div>
+            @endif
             <div class="tickets-container">
                 <h2>Historique des interventions</h2>
 
