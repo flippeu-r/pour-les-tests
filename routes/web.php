@@ -109,3 +109,16 @@ Route::get('/client', function () {
     $projets = \App\Models\Projet::where('user_id', Auth::id())->get();
     return view('client', compact('projets'));
 });
+
+// vue interface page client
+
+Route::post('/client/tickets/{id}/valider', function ($id) {
+    $ticket = \App\Models\Ticket::findOrFail($id);
+    if (request('decision') == 'valide') {
+        $ticket->statut = 'Validé';
+    } else {
+        $ticket->statut = 'Refusé';
+    }
+    $ticket->save();
+    return redirect('/client');
+});

@@ -52,11 +52,22 @@
                                 <td>{{ $projet->date_fin ?? 'Non définie' }}</td>
                                 <td>
                                     @foreach($projet->tickets as $ticket)
-                                        <div style="margin-bottom:5px;">
-                                            <span class="status">{{ $ticket->sujet }}</span>
-                                            — {{ $ticket->statut }}
-                                            @if($ticket->type == 'facturable')
-                                                <span style="color:orange; font-weight:bold;">(Facturable)</span>
+                                        <div style="margin-bottom:8px; padding:8px; background:rgba(255,255,255,0.05); border-radius:6px;">
+                                            <strong>{{ $ticket->sujet }}</strong>
+                                            <span style="margin-left:10px;" class="client-badge">{{ $ticket->statut }}</span>
+                                            <span style="margin-left:5px; color:orange;">{{ $ticket->type == 'facturable' ? '(Facturable)' : '' }}</span>
+
+                                            @if($ticket->type == 'facturable' && $ticket->statut == 'Nouveau')
+                                                <form action="/client/tickets/{{ $ticket->id }}/valider" method="POST" style="margin-top:6px;">
+                                                    @csrf
+                                                    <textarea name="commentaire" placeholder="Commentaire (optionnel)" style="width:100%; padding:5px; border-radius:4px; margin-bottom:5px;"></textarea>
+                                                    <button type="submit" name="decision" value="valide" style="background:green; color:white; border:none; padding:4px 10px; border-radius:4px; cursor:pointer;">
+                                                         Valider
+                                                    </button>
+                                                    <button type="submit" name="decision" value="refuse" style="background:red; color:white; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; margin-left:5px;">
+                                                         Refuser
+                                                    </button>
+                                                </form>
                                             @endif
                                         </div>
                                     @endforeach
