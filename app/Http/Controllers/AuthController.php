@@ -41,9 +41,15 @@ class AuthController extends Controller
 
         // Auth::attempt va chercher l'email en base et vérifier si le mot de passe correspond
         if (Auth::attempt($credentials)) {
-            // C'est le bon ! On sécurise la session et on l'envoie sur le dashboard
             $request->session()->regenerate();
-            return redirect('/dashboard');
+
+            if (Auth::user()->role == 'admin') {
+                return redirect('/admin');
+            } elseif (Auth::user()->role == 'client') {
+                return redirect('/client');
+            } else {
+                return redirect('/dashboard');
+            }
         }
 
         // C'est le mauvais mot de passe : on renvoie la page avec la variable $erreur
