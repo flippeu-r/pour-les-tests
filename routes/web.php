@@ -122,3 +122,8 @@ Route::post('/client/tickets/{id}/valider', function ($id) {
     $ticket->save();
     return redirect('/client');
 });
+
+
+//commentaires tickets 
+
+$ticket->commentaire_client = request('commentaire');
